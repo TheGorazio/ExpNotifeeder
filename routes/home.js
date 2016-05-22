@@ -4,7 +4,7 @@ var request = require('request');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    if (req.cookies.auth) {res.status(400); res.end();}
+    if (!req.cookies.auth) {res.status(400); res.end();}
     getChannels();
     function getChannels() {
         request({
