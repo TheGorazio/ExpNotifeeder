@@ -1,4 +1,14 @@
 $(document).ready(function(){
+
+    $('#confirm-pass').on('keyup', function(e) {
+        console.log(e.target.value + ' --- ' + $('#pass').val());
+        if ($('#pass').val() === $(this).val()) {
+            $('#reg-btn').prop('disabled', false);
+        } else {
+            $('#reg-btn').prop('disabled', true);
+        }
+    });
+
     $('.channel').click(function(e) {
         var id = $(this).attr('id');
         document.location.href = '/channels/' + id;
@@ -10,14 +20,15 @@ $(document).ready(function(){
     $('.edit-channel').on('click', function(e) {
         document.location.href = '/channels/' + getId() + '/edit';
     });
+
     $('.add-post').on('click', function(e) {
         console.log('adding new post...');
         $('.add-post-form').toggleClass('hide');
     });
     $('#savePost').on('click', function(e) {
         $.post("http://85.30.249.228/backend/webapi/channels/" + getId() + "/posts", {
-            title: $('.title').value,
-            text: $('.text').value
+            title: $('.title').val(),
+            text: $('.text').val()
         }).success(function() {
             console.log("Success");
         });

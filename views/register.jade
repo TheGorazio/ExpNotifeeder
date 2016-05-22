@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Register
+    form(action="/register", method="POST")
+        p
+            label Email
+            input(type="text", name="email", required)
+        p
+            label Password
+            input(type="text", name="password", required, id="pass")
+        p
+            label Confirm Password
+            input(type="text", required, id="confirm-pass")
+        input(type="submit", value="Register", id="reg-btn", disabled)
+    a(href="/auth") Sign in
