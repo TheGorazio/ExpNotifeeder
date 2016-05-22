@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
         if (!error && response.statusCode == 200) {
             console.log("LOGGED IN");
             console.log(body);
-            req.cookies.auth = response.headers['set-cookie'];
+            res.cookie('auth',response.headers['set-cookie']);
             res.redirect('/home');
         } else {
             res.render('auth', {title: 'Authentication',
