@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Your favorite channels
+    .new-channel Create Channel
+    if channels.length > 0
+        .channels
+            each channel in channels
+                div.channel(id=channel.id)
+                    h2= channel.name
+                    p= channel.description
+    else
+        h2 Нет каналов

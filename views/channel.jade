@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+    if error == ''
+
+        .channel-page
+            if channel.group != null
+                .edit-channel Edit Channel
+            h1= channel.name
+            p= channel.description
+
+            .posts
+            each post in posts
+                h3= post.title
+                p= post.text
+
+            if channel.group != null
+
+                .add-post-form.hide
+
+                    p
+                        label Title
+                        input(type="text", name="title", required)
+                    p
+                        label Text
+                        textarea(name="text", rows="10", cols="40", required)
+                    button(type="submit", id="savePost") Add Post
+
+                .add-post
+    else
+        h3= error
