@@ -20,7 +20,10 @@ router.get('/', function(req, res, next) {
                         channels: body
                     });
             } else {
-                return [];
+                res.render('home',
+                    {
+                        channels: []
+                    });
             }
         });
     }
