@@ -5,20 +5,11 @@ block content
         h2= id
         form(action="/channels/#{channel.id}/edit", method="POST")
             p
-                label Channel ID
-                input(name="id", value="#{channel.id}")
-            p
                 label Channel Name
                 input(type="text", name="name", value="#{channel.name}")
             p
                 label Description
                 textarea(name="description", rows="10", cols="40")= channel.description
-            p
-                label icon
-                input(name="icon", value="#{channel.icon}")
-            p
-                label Tags
-                input(name="tagList", value="#{channel.tagList}")
             input(type="submit", value="Save")
     else
         h1 You do not have permissions

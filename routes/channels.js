@@ -35,10 +35,10 @@ router.post('/:id/edit', function(req, res, next) {
             'cookie': req.cookies.auth
         },
         body: {
-            'id': req.body.id,
+            'id': req.params.id,
             'name': req.body.name,
             'description': req.body.description,
-            'icon': req.body.icon,
+            'icon': '',
             'tagList': []
         },
         json: true
