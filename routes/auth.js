@@ -7,7 +7,7 @@ var router = express.Router();
 var request = require('request');
 
 router.get('/', function(req, res, next) {
-    if (req.cookie.auth) res.redirect('home');
+    if (req.cookie.auth) res.redirect('/home');
     res.render('auth', {title: 'Authentication',
                         my_err: ''});
 
