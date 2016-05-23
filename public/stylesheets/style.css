@@ -1,6 +1,15 @@
 body {
-  padding: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 15px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+* {
+  box-sizing: inherit; }
 
 a {
   color: #00B7FF;
@@ -36,5 +45,9 @@ a {
 
 .hide {
   display: none; }
+
+.page-title {
+  margin: 0 0 30px;
+  line-height: 1; }
 
 /*# sourceMappingURL=style.css.map */

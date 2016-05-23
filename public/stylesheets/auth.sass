@@ -1,0 +1,49 @@
+$color-invalid: #cf5340
+$color-valid: #b4d388
+
+.auth-form
+  display: block
+  max-width: 480px
+  width: 100%
+  padding: 1rem
+
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
+  border: 1px solid rgba(0, 0, 0, .2)
+  background: #fff
+  border-radius: 3px
+
+  input
+    display: block
+    width: 100%
+
+    margin: 15px 0
+
+    padding: .5rem
+
+    background-size: 8px
+    background: no-repeat right .75rem center
+
+    outline: 0
+    border: 1px solid #e5e5e5
+    transition: border-color .15s linear
+
+    &:hover
+      border-color: #a0a0a0
+
+    &[required]
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCA4IDE2IDE2JyBlbmFibGUtYmFja2dyb3VuZD0nbmV3IDAgOCAxNiAxNic+PHN0eWxlIHR5cGU9J3RleHQvY3NzJz4uc3Qwe2ZpbGw6I0YxODI2MDt9PC9zdHlsZT48cGF0aCBjbGFzcz0nc3QwJyBkPSdNNy4yIDE3LjRsLTUuNCAzLjgtMS40LTIuNSA2LTIuNy02LjEtMi44IDEuNC0yLjQgNS40IDMuOC0uNS02LjZoMi43bC0uNSA2LjYgNS40LTMuOCAxLjQgMi40LTYgMi44IDYuMSAyLjgtMS40IDIuNS01LjQtMy44LjUgNi41aC0yLjhsLjYtNi42eicvPjwvc3ZnPg==")
+      &:focus
+        &:invalid
+          border-color: $color-invalid
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48Y2lyY2xlIGZpbGw9IiNDRjUzNDAiIGN4PSI4IiBjeT0iOCIgcj0iOCIvPjwvc3ZnPg==")
+      &:valid
+        border-color: $color-valid
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48Y2lyY2xlIGZpbGw9IiNCNEQzODgiIGN4PSI4IiBjeT0iOCIgcj0iOCIvPjwvc3ZnPg==")
+  input[type='submit']
+    text-transform: uppercase
+    font-size: 1.5em
+    font-weight: bold
+    cursor: pointer
+  label
+    font-size: 1.3em
