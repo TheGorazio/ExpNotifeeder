@@ -1,16 +1,19 @@
 extends layout
 
 block content
-    h1 Register
-    form(action="/register", method="POST")
+    .page-title
+        h1 Register
+        if error != ''
+            h2= error
+    form.auth-form(action="/register", method="POST")
         p
             label Email
-            input(type="text", name="email", required)
+            input(type="email", name="email", required, placeholder='Your email')
         p
             label Password
-            input(type="text", name="password", required, id="pass")
+            input(type="password", name="password", required, id="pass", placeholder='Your password', pattern=".{5,}")
         p
             label Confirm Password
-            input(type="text", required, id="confirm-pass")
+            input(type="password", required, id="confirm-pass", placeholder='Confirm your password', pattern=".{5,}")
         input(type="submit", value="Register", id="reg-btn", disabled)
-    a(href="/auth") Sign in
+        a(href="/auth") Sign In
