@@ -2,8 +2,9 @@ ul
   display: flex
   flex-flow: row nowrap
   justify-content: space-between
-  align-items: center
+  align-items: flex-start
   width: 100%
+
   li
     list-style: none
     text-decoration: none
@@ -50,4 +51,5 @@ ul
         &::before
           width: 50%
 
-
+    &:last-child
+      margin-right: 35px
