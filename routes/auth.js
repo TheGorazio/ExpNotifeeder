@@ -8,8 +8,14 @@ var request = require('request');
 
 router.get('/', function(req, res, next) {
     if (req.cookies.auth) res.redirect('/home');
-    res.render('auth', {title: 'Authentication',
-                        my_err: ''});
+    if (req.params.new != '') {
+        res.render('auth', {title: 'Authentication',
+            my_err: 'Registration success, log in'});
+    } else {
+        res.render('auth', {title: 'Authentication',
+            my_err: ''});
+    }
+
 
 });
 
