@@ -1,0 +1,10 @@
+ul { display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center; width: 100%; }
+ul li { list-style: none; text-decoration: none; display: inline-block; text-transform: uppercase; font-family: "Lucida Grande", Helvetica, Arial, sans-serif; font-size: 1.4em; }
+ul li a { text-decoration: none; color: black; position: relative; transition: color 0.6s; }
+ul li a::after { content: ""; display: block; position: absolute; top: 100%; height: 1px; width: 0; left: 50%; background-color: cornflowerblue; transition: width 0.4s; }
+ul li a::before { content: ""; display: block; position: absolute; top: 100%; height: 1px; width: 0; right: 50%; background-color: cornflowerblue; transition: width 0.4s; }
+ul li a:active, ul li a:hover, ul li a:focus { color: cornflowerblue; }
+ul li a:active::after, ul li a:hover::after, ul li a:focus::after { width: 50%; }
+ul li a:active::before, ul li a:hover::before, ul li a:focus::before { width: 50%; }
+
+/*# sourceMappingURL=menu.css.map */
