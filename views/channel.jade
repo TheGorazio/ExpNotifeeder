@@ -18,14 +18,14 @@ block content
             if channel.group != null
 
                 .add-post-form.hide
-
-                    p
-                        label Title
-                        input(type="text", name="title", required)
-                    p
-                        label Text
-                        textarea(name="text", rows="10", cols="40", required)
-                    button(type="submit", id="savePost") Add Post
+                    form(action="/channels/newpost/#{channel.id}", method="POST")
+                        p
+                            label Title
+                            input(type="text", name="title", required)
+                        p
+                            label Text
+                            textarea(name="text", rows="10", cols="40", required)
+                        button(type="submit", id="savePost") Add Post
 
                 .add-post
     else

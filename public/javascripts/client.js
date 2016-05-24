@@ -25,15 +25,6 @@ $(document).ready(function(){
         console.log('adding new post...');
         $('.add-post-form').toggleClass('hide');
     });
-    $('#savePost').on('click', function(e) {
-        $.post("http://85.30.249.228/backend/webapi/channels/" + getId() + "/posts", {
-            title: $('.title').val(),
-            text: $('.text').val()
-        }).success(function() {
-            console.log("Success");
-        });
-        alert(id);
-    })
 });
 
 function getId() {

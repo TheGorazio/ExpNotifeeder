@@ -5,7 +5,28 @@ var request = require('request');
 router.get('/', function(req, res, next) {
     res.redirect('/home');
 });
-
+router.post('/newpost/:id', function(req, res, next) {
+    console.log('newpost');
+    request({
+        url: 'http://85.30.249.228/backend/webapi/channels/' + req.params.id + '/posts',
+        method: 'POST',
+        body: {
+            title: req.body.title,
+            text: req.body.text
+        },
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        if (!error) {
+            res.redirect('/channels/' + req.params.id);
+        } else {
+            res.write('error');
+            res.end();
+        }
+    })
+});
 router.get('/:id/edit', function(req, res, next) {
     if (isNaN(req.params.id)) next();
 
@@ -111,11 +132,6 @@ router.get('/:id', function(req, res, next) {
 
     }
 });
-
-router.get('/new', function(req, res, next) {
-   res.render('new-channel');
-});
-
 router.post('/new', function(req, res, next) {
    request({
        url: 'http://85.30.249.228/backend/webapi/users/channels',
