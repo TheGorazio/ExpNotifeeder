@@ -156,5 +156,84 @@ router.post('/new', function(req, res, next) {
        }
    });
 });
+router.post('/subscribe', function(req, res, next) {
+   console.log('subscribing.... ' + req.body.channel);
+    request({
+        url: 'http://85.30.249.228/backend/webapi/channels/' + req.body.channel,
+        method: 'PUT',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        console.log('sub body -- \n' + JSON.stringify(body));
+        if (!error && response.statusCode == 200) {
+            res.status(200);
+            res.write('Subscribe');
+            res.end();
+        } else {
+            res.status(500);
+            res.write('You can not subscribe this channel');
+            res.end();
+        }
+    })
+});
 
+router.post('/unsubscribe', function(req, res, next) {
+    console.log('unsubscribing.... ' + req.body.channel);
+    request({
+        url: 'http://85.30.249.228/backend/webapi/users/channels/' + req.body.channel,
+        method: 'DELETE',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        console.log('sub body -- \n' + JSON.stringify(body));
+        if (!error && response.statusCode == 200) {
+            res.status(200);
+            res.write('Unsubscribe success');
+            res.end();
+        } else {
+            res.status(500);
+            res.write('You can not unsubscribe this channel');
+            res.end();
+        }
+    })
+});
+
+router.get('/work', function(req, res, next) {
+    if (!req.cookies.auth) {res.redirect('/auth');}
+    getChannels();
+    function getChannels() {
+        request({
+            url: 'http://85.30.249.228/backend/webapi/users/channels/?offset=0&count=20&groupName=adminmoder',
+            method: 'GET',
+            json: true,
+            headers: {
+                'cookie': req.cookies.auth
+            }
+        }, function(error, response, body) {
+            console.log(body);
+            //console.log("work chan body....\n" + JSON.stringify(body));
+            if (!error) {
+                var channels = [];
+                console.log('start cycle');
+                for (var i = 0; i < body.length; i++) {
+                    console.log('step['+i+'] - ' + JSON.stringify(body[i]) + '\n');
+                    if (body[i].group == 'admin' || body[i].group == 'moder') channels.push(body[i]);
+                }
+                res.render('home',
+                    {
+                        channels: channels
+                    });
+            } else {
+                res.render('home',
+                    {
+                        channels: []
+                    });
+            }
+        });
+    }
+});
 module.exports = router;

@@ -1,6 +1,7 @@
 $color-invalid: #cf5340
 $color-valid: #b4d388
 $color-text: rgba(12,12,12,0.8)
+$color-text-light: rgba(12,12,12,0.4)
 $color-titles: #00B7FF
 $color-btns: cornflowerblue
 
@@ -9,8 +10,9 @@ body
   display: flex
   flex-flow: column wrap
   align-items: center
-  justify-content: flex-start
+  justify-content: space-around
   min-width: 450px
+  height: 100%
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
 *
@@ -20,15 +22,36 @@ a
   text-decoration: underline
 
 .channels
-  border: 1px solid red
-  width: 90%
+  width: 60%
 
-.channel
-  border: 1px solid darkcyan
-  cursor: pointer
+  .channel
+    border: 1px solid $color-text-light
+    width: 100%
+    box-shadow: 3px 3px 9px $color-text-light
+    padding: 15px
+    margin-bottom: 15px
+    cursor: pointer
+    position: relative
+
+    &:hover
+      border: 1px solid $color-text
+      width: 110%
+
+      &::after
+        content: ''
+        width: 50px
+        height: 50px
+        position: absolute
+        display: block
+        right: 3%
+        top: 50%
+        transform: translateY(-50%) rotateZ(45deg)
+        border-top: 1px solid black
+        border-right: 1px solid black
 
 .channel-outer
-  width: 100%
+  width: 80%
+  padding-bottom: 50px
 
   display: flex
   flex-flow: column wrap
@@ -39,12 +62,19 @@ a
     margin-top: 1em
     width: 80%
 
+    .desc
+      border: 1px solid $color-text
+      padding: 15px
+      font-size: 1.3em
+      .d
+        font-size: 1.4em
 
 .head
   display: flex
   flex-flow: row nowrap
   justify-content: space-between
   align-items: center
+  padding: 15px
 
   h1
     letter-spacing: 1px
@@ -53,30 +83,61 @@ a
     display: inline
     margin-right: 30px
     transition: all 0.6s
+    font-size: 2.5em
 
+.post
+  border: 1px solid rgba(12,12,12,0.6)
+  padding-right: 15px
+  padding-left: 15px
+  margin-bottom: 15px
 
+  .date
+    text-align: right
+
+  .btn
+    text-align: right
+
+.title
+  font-size: 1.4em
+.text
+    font-size: 1.2em
+
+.detele-post
+  margin-bottom: 15px
 .add-post
   display: block
-  border: 1px solid rgba(12,12,12,0.6)
   border-radius: 50%
   width: 40px
   height: 40px
   position: relative
+  margin-left: 50%
+  margin-top: 15px
+  transform: translateX(-50%)
+  background-image: url(../images/plus.svg)
+  background-size: cover
+  cursor: pointer
+  transition: all 0.5s
 
-  &::after,
-  &::before
-    content: ' '
-    display: block
-    position: absolute
-    width: 30px
-    height: 1px
-    background-color: #000
-    top: 20px
-    left: 5px
+  &:hover
+    width: 45px
+    height: 45px
 
+.add-post-form
+  display: block
+  border: 1px solid rgba(12,12,12,0.6)
+  padding: 15px
+  text-align: right
 
-  &::before
-    transform: rotateZ(90deg)
+  .title
+    margin-right: 5px
+
+  input:not([type="submit"]),
+  textarea
+    width: 450px
+    font-size: 1.2em
+
+  .btn
+    background-color: transparent
 
 .hide
   display: none
@@ -108,18 +169,36 @@ a
 .subscribed
   width: 40px
   height: 40px
-  transition: all 1.5s
+  transition: all .5s
   -webkit-border-radius: 50%
   -moz-border-radius: 50%
   border-radius: 50%
-  background-image: url('../images/sub-svg.svg')
+  background-image: url(../images/sub.svg)
   background-size: cover
+  position: relative
+  margin-right: 125px
+
+  &::before
+    display: block
+    content: 'Subscribed'
+    height: 40px
+    color: $color-text
+    position: absolute
+    left: 45px
+    transition: all 0.5s
+
+  &:hover::before
+    content: 'Unsubscribe'
+
+  &:hover
+    background-image: url(../images/unsub.svg)
 
 .footer
-  position: absolute
-  bottom: 0
-  left: 50%
-  transform: translateX(-25%)
+  clear: both
+  position: relative
+  text-align: left
+  width: 100%
+  padding-left: 50px
   text-transform: uppercase
   font-size: 1.3em
   color: $color-text

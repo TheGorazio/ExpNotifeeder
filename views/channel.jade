@@ -1,36 +1,48 @@
 extends layout
 
 block content
-
+    include menu
     .channel-outer
         if error == ''
 
             .channel-page
                 .head
                     h1= channel.name
-                    if channel.group != null
+                    if channel.group == 'admin' || channel.group == 'moder'
                         .edit-channel.btn Edit Channel
                     else
-                        .btn.subscribe Subscribe
+                        if channel.group == 'user'
+                            .btn.subscribe.subscribed Subscribe
+                        else
+                            .btn.subscribe Subscribe
 
-                p.desc= channel.description
+
+                p.desc
+                    span.d Description: #{channel.description}
+                    span.tags
+                        each tag in channel.tagList
+                            h4= tag
 
                 .posts
                 each post in posts
-                    h3= post.title
-                    p= post.text
+                    .post
+                        h3.title= post.title
+                        p.text= post.text
+                        p.date= new Date(post.creation_date).toDateString()
+                        if channel.group == 'admin' || channel.group == 'moder'
+                            .btn.detele-post Delete
 
-                if channel.group != null
+                if channel.group == 'admin' || channel.group == 'moder'
 
                     .add-post-form.hide
                         form(action="/channels/newpost/#{channel.id}", method="POST")
                             p
-                                label Title
+                                label.title Title
                                 input(type="text", name="title", required)
                             p
-                                label Text
+                                label.title Text
                                 textarea(name="text", rows="10", cols="40", required)
-                            button(type="submit", id="savePost") Add Post
+                            button.btn(type="submit", id="savePost") Add Post
 
                     .add-post
         else

@@ -9,7 +9,7 @@ block content
         .channels
             each channel in channels
                 div.channel(id=channel.id)
-                    h2= channel.name
-                    p= channel.description
+                    h2.title= channel.name
+                    p.text= channel.description
     else
         h2 Нет каналов

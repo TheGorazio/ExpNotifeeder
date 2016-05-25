@@ -8,13 +8,14 @@ router.get('/', function(req, res, next) {
     getChannels();
     function getChannels() {
         request({
-            url: 'http://85.30.249.228/backend/webapi/channels?offset=0&count=25&channelName=',
+            url: 'http://85.30.249.228/backend/webapi/users/channels?offset=0&count=25&groupName="user"',
             method: 'GET',
             json: true,
             headers: {
                 'cookie': req.cookies.auth
             }
         }, function(error, response, body) {
+            console.log("chan body....\n" + JSON.stringify(body));
             if (!error) {
                 res.render('home',
                     {

@@ -1,6 +1,8 @@
 extends layout
 
 block content
+    include menu
+
     if channel.group != null
         h2= id
         form(action="/channels/#{channel.id}/edit", method="POST")

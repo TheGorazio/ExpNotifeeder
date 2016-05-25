@@ -1,0 +1,217 @@
+﻿---# MODELS #---
+1. User
+	- email
+	- password
+	- regDate
+
+2. Channel
+	- name
+	- description
+	- icon
+	- creation_date
+	- tagList
+
+3. Post
+	- title
+	- text
+	- creation_date
+	- owner
+	- channel
+
+---# REQUESTS #---
+
+1. Users
+
+#
+title:				Обновление персональных данных
+URL:				/users
+Method:				PUT
+URL Params:			-
+Data Params:		password
+Success response:	200
+Error response:		
+#
+
+#
+title:				Получить значение моего профиля
+URL:				/users
+Method:				GET
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Получить все мои каналы
+URL:				/users/channels
+Method:				GET
+URL Params:			?offset='val1'&count='val2'&groupType='val3'
+Data Params:		-	
+Success response:	200
+Error response:		
+#
+
+#
+title:				Создать новый канал
+URL:				/users/channels
+Method:				POST
+URL Params:			-
+Data Params:		name, description, icon, tagList
+Success response:	200
+Error response:		
+#
+
+#
+title:				Обновление атрибутов канал 
+URL:				/users/channels
+Method:				PUT
+URL Params:			-
+Data Params:		name, description, icon, tagList
+Success response:	200
+Error response:		
+#
+
+#
+title:				Обновление группы пользователя 
+URL:				/users/channels/{id}
+Method:				PUT
+URL Params:			-
+Data Params:		email
+Success response:	200
+Error response:		
+#
+
+#
+title:				Отписаться от канала
+URL:				/users/channels/{id}
+Method:				DELETE
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+2. Channels
+
+#
+title:				Поиск по каналам
+URL:				/channels
+Method:				GET
+URL Params:				
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Получить канал по "id"
+URL:				/channels/{id}
+Method:				GET
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Подписаться на канал
+URL:				/channels/{id}
+Method:				PUT
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Удалить канал
+URL:				/channels/{id}
+Method:				DELETE
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Получить список постов
+URL:				/channels/{id}/posts
+Method:				GET
+URL Params:			?offset='val1'&count='val2'
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Создать пост
+URL:				/channels/{id}/posts
+Method:				POST
+URL Params:			-
+Data Params:		title, text
+Success response:	200
+Error response:		
+#
+
+#
+title:				Получить пост
+URL:				/channels/{id}/posts/{postID}
+Method:				GET
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Удалить пост
+URL:				/channels/{id}/posts/{postID}
+Method:				DELETE
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+3. Auth
+
+#
+title:				Авторизация
+URL:				/auth/login
+Method:				POST
+URL Params:			-
+Data Params:		email, password
+Success response:	200
+Error response:		
+#
+
+#
+title:				Выход из сессии
+URL:				/auth/logout
+Method:				GET
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#
+
+#
+title:				Регистрация
+URL:				/auth/reg
+Method:				POST
+URL Params:			-
+Data Params:		email, password
+Success response:	200
+Error response:		
+#
+
+#
+title:				Удалить аккаунт
+URL:				/auth/term
+Method:				GET
+URL Params:			-
+Data Params:		-
+Success response:	200
+Error response:		
+#

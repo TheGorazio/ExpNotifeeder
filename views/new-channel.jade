@@ -1,6 +1,8 @@
 extends layout
 
 block content
+    include menu
+
     h2 Creating new channel
     form(name="new_channel_form" action="/channels/new", method="POST")
 

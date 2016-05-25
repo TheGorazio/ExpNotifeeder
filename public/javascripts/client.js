@@ -24,15 +24,23 @@ $(document).ready(function(){
 
     $('.add-post').on('click', function(e) {
         console.log('adding new post...');
-        $('.add-post-form').toggleClass('hide');
+        $('.add-post-form').slideToggle(420);
+        document.getElementsByClassName('channel-outer')[0].scrollTop = 9999;
     });
 
-    $('.subscribe').on('click', function(e) {
-        sub_state = !sub_state;
-        console.log("klac " + sub_state);
-        if (sub_state) {
+    $('.subscribe.subscribed').text('');
+    $('.subscribe').on('click', function() {
+        if (!$(this).hasClass('subscribed')) {
             $(this).text('');
+            $.post('/channels/subscribe', {channel: getId()},
+                function(data) {
+                    console.log(data)
+                });
         } else {
+            $.post('/channels/unsubscribe', {channel: getId()},
+                function(data) {
+                    console.log(data)
+                });
             $(this).text('Subscribe');
         }
         $(this).toggleClass("subscribed");
