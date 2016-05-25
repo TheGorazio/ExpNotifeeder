@@ -25,12 +25,12 @@ block content
 
                 .posts
                 each post in posts
-                    .post
+                    .post(id=post.id)
                         h3.title= post.title
                         p.text= post.text
                         p.date= new Date(post.creation_date).toDateString()
                         if channel.group == 'admin' || channel.group == 'moder'
-                            .btn.detele-post Delete
+                            .btn.delete-post(id=post.id) Delete
 
                 if channel.group == 'admin' || channel.group == 'moder'
 

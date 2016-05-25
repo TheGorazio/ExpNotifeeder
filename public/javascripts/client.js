@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var sub_state = false
 
     $('#confirm-pass').on('keyup', function(e) {
         console.log(e.target.value + ' --- ' + $('#pass').val());
@@ -26,6 +25,17 @@ $(document).ready(function(){
         console.log('adding new post...');
         $('.add-post-form').slideToggle(420);
         document.getElementsByClassName('channel-outer')[0].scrollTop = 9999;
+    });
+
+    $('.btn').on('click', function(e) {
+        var id = $(this).attr('id');
+        $.post('/channels/delpost', {
+            channel: getId(),
+            postid: id
+        },
+            function(data) {
+                $('.post#' + id).slideUp(420);
+            });
     });
 
     $('.subscribe.subscribed').text('');

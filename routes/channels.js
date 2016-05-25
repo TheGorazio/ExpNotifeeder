@@ -215,7 +215,6 @@ router.get('/work', function(req, res, next) {
             }
         }, function(error, response, body) {
             console.log(body);
-            //console.log("work chan body....\n" + JSON.stringify(body));
             if (!error) {
                 var channels = [];
                 console.log('start cycle');
@@ -235,5 +234,26 @@ router.get('/work', function(req, res, next) {
             }
         });
     }
+});
+
+router.post('/delpost', function(req, res, next) {
+    console.log('deleting post');
+    request({
+         url: 'http://85.30.249.228/backend/webapi/channels/' + req.body.channel + '/posts/' + req.body.postid,
+         method: 'DELETE',
+         headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        console.log(body);
+        if (!error && response.statusCode == 200) {
+            res.status(200);
+            res.end();
+        } else {
+            res.status(500);
+            res.end();
+        }
+    })
 });
 module.exports = router;
