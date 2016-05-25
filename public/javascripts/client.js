@@ -27,7 +27,7 @@ $(document).ready(function(){
         document.getElementsByClassName('channel-outer')[0].scrollTop = 9999;
     });
 
-    $('.btn').on('click', function(e) {
+    $('.delete-post').on('click', function(e) {
         var id = $(this).attr('id');
         $.post('/channels/delpost', {
             channel: getId(),
@@ -54,7 +54,16 @@ $(document).ready(function(){
             $(this).text('Subscribe');
         }
         $(this).toggleClass("subscribed");
-    })
+    });
+
+    $('.search-btn').on('click', function(e) {
+        $.get('/channels/search', {
+            name: $('#search').val()
+        }, function(data) {
+            console.log(data);
+        });
+    });
+
 });
 
 function getId() {

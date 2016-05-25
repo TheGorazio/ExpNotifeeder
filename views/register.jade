@@ -11,9 +11,9 @@ block content
             input(type="email", name="email", required, placeholder='Your email')
         p
             label Password
-            input(type="password", name="password", required, id="pass", placeholder='Your password', pattern=".{5,}")
+            input(type="password", name="password", required, id="pass", placeholder='Your password', pattern=".{4,}")
         p
             label Confirm Password
-            input(type="password", required, id="confirm-pass", placeholder='Confirm your password', pattern=".{5,}")
+            input(type="password", required, id="confirm-pass", placeholder='Confirm your password', pattern=".{4,}")
         input(type="submit", value="Register", id="reg-btn", disabled)
         a(href="/auth") Sign In

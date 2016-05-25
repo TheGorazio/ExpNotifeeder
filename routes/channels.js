@@ -256,4 +256,28 @@ router.post('/delpost', function(req, res, next) {
         }
     })
 });
+
+router.get('/search', function(req, res, next) {
+    console.log(JSON.stringify(req.query));
+    request({
+        url: 'http://85.30.249.228/backend/webapi/channels?offset=0&count=20&channelName=' + req.query.name,
+        method: 'GET',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.write(JSON.stringify(body));
+            res.status(200);
+            res.end();
+        } else {
+            res.status(500);
+            res.end();
+        }
+
+
+    })
+
+});
 module.exports = router;

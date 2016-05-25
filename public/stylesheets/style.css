@@ -172,6 +172,16 @@ a {
   .subscribed:hover {
     background-image: url(../images/unsub.svg); }
 
+.search-page .search-inputs {
+  display: block;
+  text-align: center; }
+  .search-page .search-inputs .title {
+    margin-right: 15px; }
+  .search-page .search-inputs input {
+    font-size: 1.2em;
+    width: 200px;
+    margin-right: 15px; }
+
 .footer {
   clear: both;
   position: relative;
