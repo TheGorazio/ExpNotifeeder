@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    var sub_state = false
 
     $('#confirm-pass').on('keyup', function(e) {
         console.log(e.target.value + ' --- ' + $('#pass').val());
@@ -25,6 +26,17 @@ $(document).ready(function(){
         console.log('adding new post...');
         $('.add-post-form').toggleClass('hide');
     });
+
+    $('.subscribe').on('click', function(e) {
+        sub_state = !sub_state;
+        console.log("klac " + sub_state);
+        if (sub_state) {
+            $(this).text('');
+        } else {
+            $(this).text('Subscribe');
+        }
+        $(this).toggleClass("subscribed");
+    })
 });
 
 function getId() {

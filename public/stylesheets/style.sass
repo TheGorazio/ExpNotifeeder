@@ -1,20 +1,22 @@
 $color-invalid: #cf5340
 $color-valid: #b4d388
+$color-text: rgba(12,12,12,0.8)
+$color-titles: #00B7FF
+$color-btns: cornflowerblue
 
 body
   box-sizing: border-box
   display: flex
   flex-flow: column wrap
   align-items: center
-  justify-content: center
+  justify-content: flex-start
   min-width: 450px
-  min-height: 100vh
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
 *
   box-sizing: inherit
 a
-  color: #00B7FF
+  color: $color-titles
   text-decoration: underline
 
 .channels
@@ -23,6 +25,35 @@ a
 
 .channel
   border: 1px solid darkcyan
+  cursor: pointer
+
+.channel-outer
+  width: 100%
+
+  display: flex
+  flex-flow: column wrap
+  align-items: center
+  justify-content: flex-start
+
+  .channel-page
+    margin-top: 1em
+    width: 80%
+
+
+.head
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  align-items: center
+
+  h1
+    letter-spacing: 1px
+    width: auto
+    color: $color-btns
+    display: inline
+    margin-right: 30px
+    transition: all 0.6s
+
 
 .add-post
   display: block
@@ -56,3 +87,40 @@ a
   min-width: 300px
   text-align: center
 
+.btn
+  display: inline-block
+  width: auto
+  padding: 10px
+  height: 40px
+  text-transform: uppercase
+  text-align: center
+  font-size: 1.3em
+  border: 1px solid rgba(12,12,12,0.3)
+  border-radius: 4px
+  transition: all 0.5s
+  cursor: pointer
+  color: black
+
+  &:hover
+    border: 1px solid $color-btns
+    color: $color-btns
+
+.subscribed
+  width: 40px
+  height: 40px
+  transition: all 1.5s
+  -webkit-border-radius: 50%
+  -moz-border-radius: 50%
+  border-radius: 50%
+  background-image: url('../images/sub-svg.svg')
+  background-size: cover
+
+.footer
+  position: absolute
+  bottom: 0
+  left: 50%
+  transform: translateX(-25%)
+  text-transform: uppercase
+  font-size: 1.3em
+  color: $color-text
+  pointer-events: none
