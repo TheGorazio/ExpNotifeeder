@@ -63,13 +63,14 @@ $(document).ready(function(){
     });
 
     $('.btn.search-btn').on('click', function(e) {
+        var dom = $('.channels');
+        dom.append($('<div class="loader"></div>'));
         $.post('/channels/search', {
             name: $('#search').val()
         }, function(data) {
             var channels = JSON.parse(data);
 
-            var domChannels = [],
-                dom = $('.channels');
+            var domChannels = [];
             dom.empty();
             for (var i = 0; i < channels.length; i++) {
                 var channel = $('<div class="channel" id="'+ channels[i].id + '">' +
