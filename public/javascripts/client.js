@@ -64,6 +64,7 @@ $(document).ready(function(){
 
     $('.btn.search-btn').on('click', function(e) {
         var dom = $('.channels');
+        dom.empty();
         dom.append($('<div class="loader"></div>'));
         $.post('/channels/search', {
             name: $('#search').val()
