@@ -3,7 +3,7 @@ extends layout
 block content
     include menu
     .head
-        h1 Your favorite channels
+        h1= title
         .new-channel.btn Create New Channel
     if channels.length > 0
         .channels

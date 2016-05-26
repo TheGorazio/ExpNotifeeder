@@ -2,8 +2,10 @@ $color-invalid: #cf5340
 $color-valid: #b4d388
 $color-text: rgba(12,12,12,0.8)
 $color-text-light: rgba(12,12,12,0.4)
+$color-text-light-extra: rgba(12,12,12,0.1)
 $color-titles: #00B7FF
 $color-btns: cornflowerblue
+$color-back: #dbdbdd
 
 body
   box-sizing: border-box
@@ -25,17 +27,18 @@ a
   width: 60%
 
   .channel
-    border: 1px solid $color-text-light
+    border: 1px solid $color-text-light-extra
     width: 100%
-    box-shadow: 3px 3px 9px $color-text-light
+    box-shadow: 0 2px 4px $color-text-light
     padding: 15px
     margin-bottom: 15px
     cursor: pointer
     position: relative
+    transition: all 0.3s
 
     &:hover,
     &:active
-      border: 1px solid $color-text
+      border: 1px solid $color-text-light
       width: 110%
 
       &::after
@@ -62,11 +65,11 @@ a
   .channel-page
     margin-top: 1em
     width: 80%
-
     .desc
-      border: 1px solid $color-text
+      box-shadow: 0 2px 4px $color-text-light
       padding: 15px
       font-size: 1.3em
+
       .d
         font-size: 1.4em
 
@@ -76,6 +79,9 @@ a
   justify-content: space-between
   align-items: center
   padding: 15px
+  box-shadow: 0 2px 4px $color-text-light
+  border: 1px solid $color-text-light-extra
+  margin-bottom: 15px
 
   h1
     letter-spacing: 1px
@@ -86,11 +92,29 @@ a
     transition: all 0.6s
     font-size: 2.5em
 
+.channel-form
+  width: 40%
+  height: 250px
+
+  input:not([type="submit"])
+    margin-left: 1em
+    width: 200px
+  .title
+    display: inline-block
+    width: 200px
+  .btn
+    background-color: transparent
+
+.delete-channel
+  margin-left: 2em
+
 .post
-  border: 1px solid rgba(12,12,12,0.6)
+  padding-top: 15px
   padding-right: 15px
   padding-left: 15px
   margin-bottom: 15px
+  box-shadow: 0 2px 4px $color-text-light
+  border: 1px solid $color-text-light-extra
 
   .date
     text-align: right
@@ -101,7 +125,8 @@ a
 .title
   font-size: 1.4em
 .text
-    font-size: 1.2em
+  word-wrap: break-word
+  font-size: 1.2em
 
 .delete-post
   margin-bottom: 15px
@@ -118,6 +143,7 @@ a
   background-size: cover
   cursor: pointer
   transition: all 0.5s
+  box-shadow: 0 2px 4px $color-text-light
 
   &:hover
     width: 45px
@@ -194,10 +220,21 @@ a
   &:hover
     background-image: url(../images/unsub.svg)
 
+.moder
+  &::after
+    display: block
+    content: 'Moderator'
+    height: 40px
+    color: $color-text
+    position: absolute
+    right: 45px
+    transition: all 0.5s
+
 .search-page
   .search-inputs
     display: block
     text-align: center
+    margin-bottom: 15px
     .title
       margin-right: 15px
     input

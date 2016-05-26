@@ -8,14 +8,16 @@ block content
             .channel-page
                 .head
                     h1= channel.name
-                    if channel.group == 'admin' || channel.group == 'moder'
+                    if channel.group == 'admin'
                         .edit-channel.btn Edit Channel
                     else
-                        if channel.group == 'user'
-                            .btn.subscribe.subscribed Subscribe
+                        if channel.group == 'moder'
+                            .btn.subscribe.subscribed.moder Subscribe
                         else
-                            .btn.subscribe Subscribe
-
+                            if channel.group == 'user'
+                                .btn.subscribe.subscribed Subscribe
+                            else
+                                .btn.subscribe Subscribe
 
                 p.desc
                     span.d Description: #{channel.description}
@@ -27,7 +29,7 @@ block content
                 each post in posts
                     .post(id=post.id)
                         h3.title= post.title
-                        p.text= post.text
+                        .text= post.text
                         p.date= new Date(post.creation_date).toDateString()
                         if channel.group == 'admin' || channel.group == 'moder'
                             .btn.delete-post(id=post.id) Delete

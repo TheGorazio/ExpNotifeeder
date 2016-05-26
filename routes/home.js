@@ -19,12 +19,14 @@ router.get('/', function(req, res, next) {
             if (!error) {
                 res.render('home',
                     {
-                        channels: body
+                        channels: body,
+                        title : 'Your favorite channels'
                     });
             } else {
                 res.render('home',
                     {
-                        channels: []
+                        channels: [],
+                        title : 'Your favorite channels'
                     });
             }
         });

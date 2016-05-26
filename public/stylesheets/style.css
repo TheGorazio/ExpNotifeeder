@@ -18,15 +18,16 @@ a {
 .channels {
   width: 60%; }
   .channels .channel {
-    border: 1px solid rgba(12, 12, 12, 0.4);
+    border: 1px solid rgba(12, 12, 12, 0.1);
     width: 100%;
-    box-shadow: 3px 3px 9px rgba(12, 12, 12, 0.4);
+    box-shadow: 0 2px 4px rgba(12, 12, 12, 0.4);
     padding: 15px;
     margin-bottom: 15px;
     cursor: pointer;
-    position: relative; }
+    position: relative;
+    transition: all 0.3s; }
     .channels .channel:hover, .channels .channel:active {
-      border: 1px solid rgba(12, 12, 12, 0.8);
+      border: 1px solid rgba(12, 12, 12, 0.4);
       width: 110%; }
       .channels .channel:hover::after, .channels .channel:active::after {
         content: '';
@@ -51,7 +52,7 @@ a {
     margin-top: 1em;
     width: 80%; }
     .channel-outer .channel-page .desc {
-      border: 1px solid rgba(12, 12, 12, 0.8);
+      box-shadow: 0 2px 4px rgba(12, 12, 12, 0.4);
       padding: 15px;
       font-size: 1.3em; }
       .channel-outer .channel-page .desc .d {
@@ -62,7 +63,10 @@ a {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 15px; }
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(12, 12, 12, 0.4);
+  border: 1px solid rgba(12, 12, 12, 0.1);
+  margin-bottom: 15px; }
   .head h1 {
     letter-spacing: 1px;
     width: auto;
@@ -72,11 +76,28 @@ a {
     transition: all 0.6s;
     font-size: 2.5em; }
 
+.channel-form {
+  width: 40%;
+  height: 250px; }
+  .channel-form input:not([type="submit"]) {
+    margin-left: 1em;
+    width: 200px; }
+  .channel-form .title {
+    display: inline-block;
+    width: 200px; }
+  .channel-form .btn {
+    background-color: transparent; }
+
+.delete-channel {
+  margin-left: 2em; }
+
 .post {
-  border: 1px solid rgba(12, 12, 12, 0.6);
+  padding-top: 15px;
   padding-right: 15px;
   padding-left: 15px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(12, 12, 12, 0.4);
+  border: 1px solid rgba(12, 12, 12, 0.1); }
   .post .date {
     text-align: right; }
   .post .btn {
@@ -86,6 +107,7 @@ a {
   font-size: 1.4em; }
 
 .text {
+  word-wrap: break-word;
   font-size: 1.2em; }
 
 .delete-post {
@@ -103,7 +125,8 @@ a {
   background-image: url(../images/plus.svg);
   background-size: cover;
   cursor: pointer;
-  transition: all 0.5s; }
+  transition: all 0.5s;
+  box-shadow: 0 2px 4px rgba(12, 12, 12, 0.4); }
   .add-post:hover {
     width: 45px;
     height: 45px; }
@@ -172,9 +195,19 @@ a {
   .subscribed:hover {
     background-image: url(../images/unsub.svg); }
 
+.moder::after {
+  display: block;
+  content: 'Moderator';
+  height: 40px;
+  color: rgba(12, 12, 12, 0.8);
+  position: absolute;
+  right: 45px;
+  transition: all 0.5s; }
+
 .search-page .search-inputs {
   display: block;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 15px; }
   .search-page .search-inputs .title {
     margin-right: 15px; }
   .search-page .search-inputs input {

@@ -2,16 +2,19 @@ extends layout
 
 block content
     include menu
-
-    if channel.group != null
+    h1 Editing channel
+    if channel.group == 'admin'
         h2= id
-        form(action="/channels/#{channel.id}/edit", method="POST")
+
+        form.channel-form(action="/channels/#{channel.id}/edit", method="POST")
             p
-                label Channel Name
-                input(type="text", name="name", value="#{channel.name}")
+                label.title Channel Name
+                input(type="text", name="name", value="#{channel.name}", required)
             p
-                label Description
-                textarea(name="description", rows="10", cols="40")= channel.description
+                label.title Description
+                textarea(name="description", rows="10", cols="40", required)= channel.description
             input.btn(type="submit", value="Save")
+            .btn.delete-channel Delete Channel
+
     else
         h1 You do not have permissions

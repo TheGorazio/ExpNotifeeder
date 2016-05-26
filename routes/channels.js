@@ -17,7 +17,8 @@ router.post('/newpost/:id', function(req, res, next) {
         headers: {
             'cookie': req.cookies.auth
         },
-        json: true
+        json: true,
+        encoding: null
     }, function(error, response, body) {
         if (!error) {
             res.redirect('/channels/' + req.params.id);
@@ -36,7 +37,8 @@ router.get('/:id/edit', function(req, res, next) {
         headers: {
             'cookie': req.cookies.auth
         },
-        json: true
+        json: true,
+        encoding: null
     }, function(error,response,body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
@@ -62,10 +64,11 @@ router.post('/:id/edit', function(req, res, next) {
             'icon': '',
             'tagList': []
         },
-        json: true
+        json: true,
+        encoding: null
     }, function(error,response,body) {
         if (!error && response.statusCode == 200) {
-            res.redirect('/channels/' + req.body.id);
+            res.redirect('/channels/' + req.params.id);
         } else {
             console.log("ERROR WHEN EDITING");
             console.error(error);
@@ -132,6 +135,10 @@ router.get('/:id', function(req, res, next) {
 
     }
 });
+router.get('/new', function(req, res, next) {
+    res.render('new-channel');
+    res.end();
+});
 router.post('/new', function(req, res, next) {
    request({
        url: 'http://85.30.249.228/backend/webapi/users/channels',
@@ -155,6 +162,27 @@ router.post('/new', function(req, res, next) {
             console.error(error);
        }
    });
+});
+router.post('/delete', function(req, res, next) {
+    request({
+        url: 'http://85.30.249.228/backend/webapi/users/channels/' + req.body.channel,
+        method: 'DELETE',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body)  {
+
+        if (!error && response.statusCode == 200) {
+            res.status(200);
+            res.write(""+body);
+            res.end();
+        } else {
+            res.status(500);
+            res.write(error);
+            res.end();
+        }
+    });
 });
 router.post('/subscribe', function(req, res, next) {
    console.log('subscribing.... ' + req.body.channel);
@@ -212,7 +240,8 @@ router.get('/work', function(req, res, next) {
             json: true,
             headers: {
                 'cookie': req.cookies.auth
-            }
+            },
+            encoding: null
         }, function(error, response, body) {
             console.log(body);
             if (!error) {
@@ -224,12 +253,14 @@ router.get('/work', function(req, res, next) {
                 }
                 res.render('home',
                     {
-                        channels: channels
+                        channels: channels,
+                        title: 'Your work channels'
                     });
             } else {
                 res.render('home',
                     {
-                        channels: []
+                        channels: [],
+                        title: 'Your work channels'
                     });
             }
         });
@@ -256,28 +287,46 @@ router.post('/delpost', function(req, res, next) {
         }
     })
 });
-
-router.get('/search', function(req, res, next) {
-    console.log(JSON.stringify(req.query));
+router.post('/delete', function(req, res, next) {
+    console.log('deleting channel ' + req.body.channel);
     request({
-        url: 'http://85.30.249.228/backend/webapi/channels?offset=0&count=20&channelName=' + req.query.name,
-        method: 'GET',
+        url: 'http://85.30.249.228/backend/webapi/channels/' + req.body.channel,
+        method: 'DELETE',
         headers: {
             'cookie': req.cookies.auth
         },
         json: true
     }, function(error, response, body) {
+        console.log(body);
         if (!error && response.statusCode == 200) {
-            res.write(JSON.stringify(body));
             res.status(200);
             res.end();
         } else {
             res.status(500);
             res.end();
         }
-
-
     })
-
+});
+router.post('/search', function(req, res, next) {
+    console.log(JSON.stringify(req.body.name));
+    request({
+        url: 'http://85.30.249.228/backend/webapi/channels?offset=0&count=20&channelName=' + req.body.name,
+        method: 'GET',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true,
+        encoding: null
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log('body -');
+            console.log(body);
+            res.write(JSON.stringify(body));
+            res.end();
+        } else {
+            res.write('error');
+            res.end();
+        }
+    })
 });
 module.exports = router;
