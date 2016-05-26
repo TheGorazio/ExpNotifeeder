@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     $('#confirm-pass').on('keyup', function(e) {
-        console.log(e.target.value + ' --- ' + $('#pass').val());
         if ($('#pass').val() === $(this).val()) {
             $('#reg-btn').prop('disabled', false);
         } else {
@@ -28,7 +27,6 @@ $(document).ready(function(){
         });
     });
     $('.add-post').on('click', function(e) {
-        console.log('adding new post...');
         $('.add-post-form').slideToggle(420);
         document.getElementsByClassName('channel-outer')[0].scrollTop = 9999;
     });
@@ -49,14 +47,10 @@ $(document).ready(function(){
         if (!$(this).hasClass('subscribed')) {
             $(this).text('');
             $.post('/channels/subscribe', {channel: getId(1)},
-                function(data) {
-                    console.log(data)
-                });
+                function(data) {});
         } else {
             $.post('/channels/unsubscribe', {channel: getId(1)},
-                function(data) {
-                    console.log(data)
-                });
+                function(data) {});
             $(this).text('Subscribe');
         }
         $(this).toggleClass("subscribed");
@@ -100,13 +94,23 @@ $(document).ready(function(){
 
     });
 
+    $('.cast-user').on('click', function() {
+        var email = $('#moder-email');
+        $.post('/channels/castuser', {
+            channel: getId(2),
+            user: email.val()
+        }).done(function(data) {
+            email.removeClass('decline');
+            email.addClass('success');
+        }).fail(function(data) {
+            email.removeClass('success');
+            email.addClass('decline');
+        });
+    });
 });
 
 function getId(n) {
     var href = document.location.href;
-    console.log('href - ' + href);
     var temp = href.split("?")[0].split("/");
-    console.log('temp - ' + temp);
-
     return temp[temp.length - n];
 }

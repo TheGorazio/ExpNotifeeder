@@ -229,7 +229,29 @@ router.post('/unsubscribe', function(req, res, next) {
         }
     })
 });
-
+router.post('/castuser', function(req, res, next) {
+    request({
+        url: 'http://85.30.249.228/backend/webapi/users/channels/' + req.body.channel,
+        method: 'PUT',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        body: {
+            'email': req.body.user
+        },
+        json: true
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.status(200);
+            res.write('User casted');
+            res.end();
+        } else {
+            res.status(500);
+            res.write('error');
+            res.end();
+        }
+    })
+});
 router.get('/work', function(req, res, next) {
     if (!req.cookies.auth) {res.redirect('/auth');}
     getChannels();

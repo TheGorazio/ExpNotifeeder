@@ -4,12 +4,14 @@ block content
     include menu
 
     h1 Creating new channel
-    form.channel-form(name="new_channel_form" action="/channels/new", method="POST")
+    .channel-more-page
 
-        p
-            label.title Name
-            input(type="text", name="name", required)
-        p
-            label.title Description
-            textarea(name="description", rows="10", cols="40", required)
-        input.btn(type="submit", value="Create New Channel")
+        form.channel-form(name="new_channel_form" action="/channels/new", method="POST")
+
+            p
+                label.title Name
+                input(type="text", name="name", required)
+            p
+                label.title Description
+                textarea(name="description", rows="10", cols="40", required)
+            input.btn(type="submit", value="Create New Channel")

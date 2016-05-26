@@ -3,18 +3,25 @@ extends layout
 block content
     include menu
     h1 Editing channel
-    if channel.group == 'admin'
-        h2= id
+    .channel-more-page
+        if channel.group == 'admin'
+            h2= id
 
-        form.channel-form(action="/channels/#{channel.id}/edit", method="POST")
-            p
-                label.title Channel Name
-                input(type="text", name="name", value="#{channel.name}", required)
-            p
-                label.title Description
-                textarea(name="description", rows="10", cols="40", required)= channel.description
-            input.btn(type="submit", value="Save")
-            .btn.delete-channel Delete Channel
+            form.channel-form(action="/channels/#{channel.id}/edit", method="POST")
+                p
+                    label.title Channel Name
+                    input(type="text", name="name", value="#{channel.name}", required)
+                p
+                    label.title Description
+                    textarea(name="description", rows="10", cols="40", required)= channel.description
 
-    else
-        h1 You do not have permissions
+                .add-moder
+                    label.title Moderator
+                    input(type="email", id="moder-email")
+                    .btn.cast-user Add User
+
+                input.btn(type="submit", value="Save")
+                .btn.delete-channel Delete Channel
+
+        else
+            h1 You do not have permissions
