@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
             }
         }, function(error, response, body) {
             console.log("chan body....\n" + JSON.stringify(body));
-            if (!error) {
+            if (!error && response.statusCode == 200) {
                 res.render('home',
                     {
                         channels: body,

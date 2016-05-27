@@ -266,7 +266,7 @@ router.get('/work', function(req, res, next) {
             encoding: null
         }, function(error, response, body) {
             console.log(body);
-            if (!error) {
+            if (!error && response.statusCode == 200) {
                 var channels = [];
                 console.log('start cycle');
                 for (var i = 0; i < body.length; i++) {
