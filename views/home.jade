@@ -1,15 +1,17 @@
 extends layout
 
 block content
-    include menu
-    .head
-        h1= title
-        .new-channel.btn Create New Channel
-    if channels.length > 0
-        .channels
-            each channel in channels
-                div.channel(id=channel.id)
-                    h2.title= channel.name
-                    p.text= channel.description
-    else
-        h2 Empty channels list
+    .content
+        include menu
+        .head
+            h1= title
+            .new-channel.btn Create New Channel
+        if channels.length > 0
+            .channels
+                each channel in channels
+                    div.channel(id=channel.id)
+                        h2.title= channel.name
+                        p.text= channel.description
+        else
+            h2 Empty channels list
+    include footer

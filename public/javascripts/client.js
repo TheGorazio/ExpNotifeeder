@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    var searchStep = 0;
+    var $w;
+    var wh;
+    var h;
+    var sHeight;
+    var $loader = $('<div class="loader"></div>');
+
 
     $('#confirm-pass').on('keyup', function(e) {
         if ($('#pass').val() === $(this).val()) {
@@ -57,29 +64,41 @@ $(document).ready(function(){
     });
 
     $('.btn.search-btn').on('click', function(e) {
+        var uploadState = false;
         var dom = $('.channels');
         dom.empty();
-        dom.append($('<div class="loader"></div>'));
+        dom.append($loader);
         $.post('/channels/search', {
-            name: $('#search').val()
+            name: $('#search').val(),
+            step: searchStep
         }, function(data) {
-            var channels = JSON.parse(data);
-
-            var domChannels = [];
             dom.empty();
-            for (var i = 0; i < channels.length; i++) {
-                var channel = $('<div class="channel" id="'+ channels[i].id + '">' +
-                    '<h2 class="title">' + channels[i].name + '</h2>' +
-                    '<p class="text">' + channels[i].description + '</p>' +
-                    '</div>');
+            renderChannels(JSON.parse(data));
 
-                domChannels.push(channel);
-            }
+            $w = $(window);
+            wh = $w.height();
+            h = $('body').height();
+            sHeight = h - wh;
+            $(window).scroll(function(e) {
+                var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
 
-            dom.append(domChannels);
-            $('.channel').click(function(e) {
-                var id = $(this).attr('id');
-                document.location.href = '/channels/' + id;
+                if (perc == 1 && !uploadState) {
+                    uploadState = true;
+                    searchStep++;
+                    dom.append($loader);
+                    $.post('/channels/search', {
+                        name: $('#search').val(),
+                        step: searchStep
+                    }, function(data) {
+                        $loader.remove();
+                        renderChannels(JSON.parse(data));
+                        uploadState = false;
+                        $w = $(window);
+                        wh = $w.height();
+                        h = $('body').height();
+                        sHeight = h - wh;
+                    });
+                }
             });
 
         });
@@ -113,4 +132,25 @@ function getId(n) {
     var href = document.location.href;
     var temp = href.split("?")[0].split("/");
     return temp[temp.length - n];
+}
+
+function renderChannels(data) {
+    var dom = $('.channels');
+    var domChannels = [];
+    var channels = data;
+
+    for (var i = 0; i < channels.length; i++) {
+        var channel = $('<div class="channel" id="'+ channels[i].id + '">' +
+            '<h2 class="title">' + channels[i].name + '</h2>' +
+            '<p class="text">' + channels[i].description + '</p>' +
+            '</div>');
+
+        domChannels.push(channel);
+    }
+
+    dom.append(domChannels);
+    $('.channel').click(function(e) {
+        var id = $(this).attr('id');
+        document.location.href = '/channels/' + id;
+    });
 }

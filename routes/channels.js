@@ -81,11 +81,8 @@ router.post('/:id/edit', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     if (isNaN(req.params.id)) next();
 
-    console.log('CHANNEL ID = ' + req.params.id);
     if (req.params.id > 0) {
-        console.log('Channel search...');
         var posts;
-
         request({
             url: 'http://85.30.249.228/backend/webapi/channels/' + req.params.id + '/posts?offset=0&count=10',
             method: 'GET',
@@ -134,6 +131,27 @@ router.get('/:id', function(req, res, next) {
     } else {
 
     }
+});
+router.post('/:id', function(req, res, error) {
+    var posts = [];
+    request({
+        url: 'http://85.30.249.228/backend/webapi/channels/' + req.params.id + '/posts?offset=' + 10 * req.body.step +'&count=10',
+        method: 'GET',
+        headers: {
+            'cookie': req.cookies.auth
+        },
+        json: true
+    }, function(error, response, body) {
+        console.log(body);
+        if (!error && response.statusCode == 200) {
+            console.log("POSTS: " + JSON.stringify(body));
+            res.status(200);
+            res.send(body);
+            res.end();
+        } else {
+            console.log("POSTS ERROR: " + error);
+        }
+    });
 });
 router.get('/new', function(req, res, next) {
     res.render('new-channel');
@@ -332,7 +350,7 @@ router.post('/delete', function(req, res, next) {
 router.post('/search', function(req, res, next) {
     console.log(JSON.stringify(req.body.name));
     request({
-        url: 'http://85.30.249.228/backend/webapi/channels?offset=0&count=20&channelName=' + req.body.name,
+        url: 'http://85.30.249.228/backend/webapi/channels?offset=' + req.body.step * 15 + '&count=15&channelName=' + req.body.name,
         method: 'GET',
         headers: {
             'cookie': req.cookies.auth

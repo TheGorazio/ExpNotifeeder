@@ -3,7 +3,9 @@ ul {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%; }
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px; }
   ul li {
     list-style: none;
     text-decoration: none;
@@ -42,7 +44,5 @@ ul {
           width: 50%; }
         ul li a:active::before, ul li a:hover::before, ul li a:focus::before {
           width: 50%; }
-    ul li:last-child {
-      margin-right: 35px; }
 
 /*# sourceMappingURL=menu.css.map */

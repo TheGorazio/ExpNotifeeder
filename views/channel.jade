@@ -1,51 +1,55 @@
 extends layout
 
 block content
-    include menu
-    .channel-outer
-        if error == ''
+    script(src="/javascripts/channel.js")
 
-            .channel-page
-                .head
-                    h1= channel.name
-                    if channel.group == 'admin'
-                        .edit-channel.btn Edit Channel
-                    else
-                        if channel.group == 'moder'
-                            .btn.subscribe.subscribed.moder Subscribe
+    .content
+        include menu
+        .channel-outer.content
+            if error == ''
+
+                .channel-page
+                    .head
+                        h1= channel.name
+                        if channel.group == 'admin'
+                            .edit-channel.btn Edit Channel
                         else
-                            if channel.group == 'user'
-                                .btn.subscribe.subscribed Subscribe
+                            if channel.group == 'moder'
+                                .btn.subscribe.subscribed.moder Subscribe
                             else
-                                .btn.subscribe Subscribe
+                                if channel.group == 'user'
+                                    .btn.subscribe.subscribed Subscribe
+                                else
+                                    .btn.subscribe Subscribe
 
-                p.desc
-                    span.d Description: #{channel.description}
-                    span.tags
-                        each tag in channel.tagList
-                            h4= tag
+                    p.desc
+                        span.d Description: #{channel.description}
+                        span.tags
+                            each tag in channel.tagList
+                                h4= tag
 
-                .posts
-                each post in posts
-                    .post(id=post.id)
-                        h3.title= post.title
-                        .text= post.text
-                        p.date= new Date(post.creation_date).toDateString()
-                        if channel.group == 'admin' || channel.group == 'moder'
-                            .btn.delete-post(id=post.id) Delete
+                    .posts
+                    each post in posts
+                        .post(id=post.id)
+                            h3.title= post.title
+                            .text= post.text
+                            p.date= new Date(post.creation_date).toDateString()
+                            if channel.group == 'admin' || channel.group == 'moder'
+                                .btn.delete-post(id=post.id) Delete
 
-                if channel.group == 'admin' || channel.group == 'moder'
+                    if channel.group == 'admin' || channel.group == 'moder'
 
-                    .add-post-form.hide
-                        form(action="/channels/newpost/#{channel.id}", method="POST")
-                            p
-                                label.title Title
-                                input(type="text", name="title", required)
-                            p
-                                label.title Text
-                                textarea(name="text", rows="10", cols="40", required)
-                            button.btn(type="submit", id="savePost") Add Post
+                        .add-post-form.hide
+                            form(action="/channels/newpost/#{channel.id}", method="POST")
+                                p
+                                    label.title Title
+                                    input(type="text", name="title", required)
+                                p
+                                    label.title Text
+                                    textarea(name="text", rows="7", cols="40", required)
+                                button.btn(type="submit", id="savePost") Add Post
 
-                    .add-post
-        else
-            h3= error
+                        .add-post
+            else
+                h3= error
+    include footer
